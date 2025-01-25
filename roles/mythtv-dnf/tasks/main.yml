@@ -110,7 +110,6 @@
       - libdrm-devel
       - libvdpau-devel
       - libass-devel
-      - libiec61883-devel
       - fftw-devel
       - systemd-devel
       - xvidcore-devel
@@ -134,10 +133,10 @@
   set_fact:
     dnf_pkg_lst:
       - '{{ dnf_pkg_lst }}'
+      - libiec61883-devel
       - libavc1394-devel
   when: (ansible_distribution == "Fedora") or
-        (ansible_distribution == "CentOS" and ansible_distribution_major_version|int == 8 and ansible_distribution_release != "Stream") or
-        (ansible_distribution == "CentOS" and ansible_distribution_major_version|int > 8) or
+        (ansible_distribution == "CentOS") or
         (ansible_distribution == "Rocky")
 
 - name: add optional build libraries - Fedora or el9+
