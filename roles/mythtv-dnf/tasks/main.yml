@@ -197,14 +197,14 @@
         (ansible_distribution == "CentOS") or
         (ansible_distribution == "Rocky")
 
-- name: add additional essential python3 modules - Fedora 30 to 40, Centos
+- name: add additional essential python3 modules - Fedora 30 to 40, Centos < 10
   set_fact:
     dnf_pkg_lst:
       - '{{ dnf_pkg_lst }}'
       - python3-future
   when: (ansible_distribution == "Fedora" and ansible_distribution_version|int >= 30 and ansible_distribution_version|int <= 40) or
-        (ansible_distribution == "CentOS") or
-        (ansible_distribution == "Rocky")
+        (ansible_distribution == "CentOS" and ansible_distribution_version|int < 10) or
+        (ansible_distribution == "Rocky" and ansible_distribution_version|int < 10)
 
 - name: add mythtv essential python3 mysql modules - Fedora 30+, CentOS 8
   set_fact:
