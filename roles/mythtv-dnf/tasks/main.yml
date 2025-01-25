@@ -27,12 +27,12 @@
     state: present
   when: ansible_distribution == "CentOS" or ansible_distribution == "Rocky"
 
-- name: Install epel-next for centos stream
+- name: Install epel-next for centos stream < 10
   dnf:
     name:
       epel-next-release
     state: present
-  when: (ansible_distribution == "CentOS" and ansible_distribution_release == "Stream")
+  when: (ansible_distribution == "CentOS" and ansible_distribution_release == "Stream" and ansible_distribution_major_version|int < 10)
 
 - include_tasks: setup-rpmfusion.yml
   when:    ansible_distribution == "Fedora" or ansible_distribution == "CentOS" or ansible_distribution == "Rocky"
